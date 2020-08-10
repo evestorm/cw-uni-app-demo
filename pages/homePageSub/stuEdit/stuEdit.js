@@ -70,11 +70,13 @@ export default {
 		},
 		// 学生等级变化
 		levelPickChange(e) {
-			this.copyItem.levelIndex = e.detail.value;
+			let idx = e.detail.value == -1 ? 0 : e.detail.value;
+			this.copyItem.levelIndex = idx;
 		},
 		// 班级发生改变
 		classPickChange(e) {
-			this.copyItem.calssIndex = e.detail.value;
+			let idx = e.detail.value == -1 ? 0 : e.detail.value;
+			this.copyItem.calssIndex = idx;
 		},
 		// 生日改变
 		birthdayChg(e) {

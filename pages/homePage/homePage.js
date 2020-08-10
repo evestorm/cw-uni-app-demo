@@ -157,12 +157,10 @@ export default {
 				title: '提示',
 				content: '是否删除'
 			});
-
 			if (res.confirm) {
 				let res = await DemoStudentTe.DeleteByDto({
 					id: this.calPageList[index].id
 				});
-				// this.calPageList.splice(index, 1);
 				this.$util.removeArray(this.calPageList, this.calPageList[index]);
 				console.log(this.pageList);
 			}
@@ -197,7 +195,7 @@ export default {
 				studentHeadUrl: ''
 			};
 			uni.navigateTo({
-				url: '/pages/demoSub/demoEdit/demoEdit'
+				url: '/pages/homePageSub/stuEdit/stuEdit'
 			});
 		}
 	},

@@ -69,7 +69,7 @@
 				<image class="cu-avatar" :src="copyItem.studentHeadUrl" mode="aspectFill"></image>
 			</view>
 		</view>
-		
+
 		<view class="cu-form-group margin-top">
 			<view class="title">学生等级</view>
 			<picker
@@ -97,12 +97,12 @@
 				</view>
 			</checkbox-group>
 		</view>
-		
+
 		<view class="cu-form-group align-start margin-top">
 			<view class="title">学生描述</view>
 			<textarea maxlength="999" placeholder="多行文本输入框" v-model="copyItem.studentDesc"></textarea>
 		</view>
-		
+
 		<view class="cu-form-group align-start margin-top">
 			<view class="title">学生自传</view>
 			<yyt-editor ref="yytEditor" :inputText="copyItem.studentMeRemark"></yyt-editor>
@@ -112,9 +112,9 @@
 </template>
 
 <script>
-export { default } from './demoEdit.js';
+export { default } from './stuEdit.js';
 </script>
 
 <style lang="less" scoped>
-@import url('demoEdit.less');
+@import url('stuEdit.less');
 </style>
