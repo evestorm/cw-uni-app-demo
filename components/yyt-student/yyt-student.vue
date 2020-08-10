@@ -3,8 +3,8 @@
 	<view
 		@tap="_onSelectItem(item)"
 		class="p-2 pb-0 border-bottom-4"
-		:class="{ 'bg-primary': item.selected, 'bg-white': !item.selected }"
 	>
+		<!-- :class="{ 'bg-primary': item.selected, 'bg-white': !item.selected }" -->
 		<view class="d-flex j-sb">
 			<view>姓名</view>
 			<view>{{ item.studentName }}</view>
@@ -29,7 +29,7 @@
 			<view>创建时间</view>
 			<view>{{ item.createTime | parseTextDate }}</view>
 		</view>
-		<checkbox :checked="item.selected" :class="{ checked: item.selected }" />
+		<!-- <checkbox @tap.stop="_toggleSel(item)" :checked="item.selected" :class="{ checked: item.selected }" /> -->
 		<slot></slot>
 		<slot name="button"></slot>
 	</view>

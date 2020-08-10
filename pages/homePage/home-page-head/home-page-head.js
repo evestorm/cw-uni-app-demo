@@ -1,10 +1,10 @@
 // 作者:于大明
 
 export default {
-	name: 'demo-index-head',
+	name: 'home-page-head',
 	// 注册属性
 	props: {
-		addStu: {
+		onAddStu: {
 			type: Function,
 		}
 	},

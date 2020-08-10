@@ -6,7 +6,7 @@
  * @param {Object} encode
  */
 function urlEncode(param, firstSymbol, key, encode) {
-	if (param == null||Object.keys(param).length === 0) return '';
+	if (param == null || Object.keys(param).length === 0) return '';
 	let paramStr = '';
 	let t = typeof(param);
 	if (t == 'string' || t == 'number' || t == 'boolean') {
@@ -59,8 +59,8 @@ function getCurrentPageUrlAndArgs() {
 	let pages = getCurrentPages(); //获取加载的页面
 	let currentPage = pages[pages.length - 1]; //获取当前页面的对象
 	let url = currentPage.route; //当前页面url
-	let options = currentPage.options||currentPage.$route.query; //如果要获取url中所带的参数可以查看options
-	
+	let options = currentPage.options || currentPage.$route.query; //如果要获取url中所带的参数可以查看options
+
 	//拼接url的参数
 	let urlWithArgs = url + '?';
 
@@ -79,13 +79,12 @@ function getCurrentPageUrlAndArgs() {
  * @param {eventRemark} 事件备注  比如 首页底部打电话按钮触发
  * @example this.$util.baiduEvent('客户搜索','首页顶部客户搜索');
  */
-function baiduEvent(eventName,eventRemark=''){
-	let pageUrl=getCurrentPageUrl();
-	let userInfo=getApp().globalData.userInfo;
-	if(userInfo){
-		let remark={
-		}
-		_hmt.push(['_trackEvent',remark.storeName, remark.userName, eventRemark, JSON.stringify(remark)])
+function baiduEvent(eventName, eventRemark = '') {
+	let pageUrl = getCurrentPageUrl();
+	let userInfo = getApp().globalData.userInfo;
+	if (userInfo) {
+		let remark = {}
+		_hmt.push(['_trackEvent', remark.storeName, remark.userName, eventRemark, JSON.stringify(remark)])
 	}
 }
 
@@ -94,13 +93,66 @@ function baiduEvent(eventName,eventRemark=''){
  * @param {pageUrl} 页面的URl
  * @example this.$util.baiduPageView();
  */
-function baiduPageView(pageUrl){
-	let userInfo=getApp().globalData.userInfo;
-	if(userInfo){
+function baiduPageView(pageUrl) {
+	let userInfo = getApp().globalData.userInfo;
+	if (userInfo) {
 		// 加上storeId
-		pageUrl=`${pageUrl}?storeId=${userInfo.currentStoreId}`
+		pageUrl = `${pageUrl}?storeId=${userInfo.currentStoreId}`
 		_hmt.push(['_setAutoPageview', false]);
 		_hmt.push(['_trackPageview', pageUrl]);
+	}
+}
+
+/**
+ * @description: 防抖函数：函数被触发 n 秒后再执行回调，如果在这 n 秒内又被触发，则重新计时
+ * @param {Function} fn 要执行的函数
+ * @param {Number} delay  delay毫秒后执行回调
+ */
+function debounce(fn, delay = 500) {
+	let timer = null;
+	return function() {
+		const context = this;
+		if (timer) {
+			clearTimeout(timer);
+		}
+		timer = setTimeout(() => {
+			fn.apply(context, arguments);
+			timer = null;
+		}, delay);
+	};
+}
+
+/**
+ * @description: 节流函数：规定一个单位时间，在这个单位时间内，只能有一次触发事件的回调函数执行
+ * @param {Function} fn 要执行的函数
+ * @param {Number} gapTime  单位时间
+ */
+function throttle(fn, gapTime = 500) {
+	let canUse = true;
+	return function() {
+		if (canUse) {
+			fn.apply(this, arguments);
+			canUse = false;
+			setTimeout(() => (canUse = true), gapTime);
+		}
+	};
+}
+
+function removeArray(_arr, _obj) {
+	var length = _arr.length;
+	for (var i = 0; i < length; i++) {
+		if (_arr[i] == _obj) {
+			if (i == 0) {
+				_arr.shift(); //删除并返回数组的第一个元素
+				return _arr;
+			} else if (i == length - 1) {
+				_arr.pop(); //删除并返回数组的最后一个元素
+				return _arr;
+			} else {
+				_arr.splice(i, 1); //删除下标为i的元素
+				return _arr;
+			}
+		}
 	}
 }
 
@@ -111,5 +163,8 @@ export default {
 	getCurrentPageUrl,
 	getCurrentPageUrlAndArgs,
 	baiduEvent,
-	baiduPageView
+	baiduPageView,
+	debounce,
+	throttle,
+	removeArray
 }

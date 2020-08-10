@@ -2,7 +2,8 @@
 	"pages": [{
 			"path": "pages/homePage/homePage",
 			"style": {
-				"navigationBarTitleText": "首页"
+				"navigationBarTitleText": "首页",
+				"enablePullDownRefresh": true
 			}
 		},
 		{
